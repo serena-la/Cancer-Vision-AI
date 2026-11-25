@@ -1,0 +1,63 @@
+/* Cancer Vision AI — navy / teal research interface */
+:root {
+    --navy: #10243a;
+    --navy-2: #183650;
+    --teal: #55b8ad;
+    --teal-light: #dff3f0;
+    --ink: #172b40;
+    --muted: #718196;
+    --line: #e3eaf0;
+    --surface: #ffffff;
+    --page: #f5f8fb;
+}
+.stApp { background: var(--page); color: var(--ink); }
+[data-testid="stHeader"] { background: rgba(245,248,251,.92); }
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #10243a 0%, #142f49 100%);
+    border-right: 1px solid #25445d;
+}
+[data-testid="stSidebar"] * { color: #e8f0f6 !important; }
+[data-testid="stSidebar"] [data-testid="stRadio"] label { padding: 7px 9px; border-radius: 8px; }
+[data-testid="stSidebar"] [data-testid="stRadio"] label:hover { background: #23445f; }
+.brand-wrap { display:flex; align-items:center; gap:11px; padding: 8px 2px 14px; }
+.brand-icon { width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    border-radius:12px; background:#244b61; color:#7bd4c9; font-size:25px; }
+.brand-name { font-size:14px; font-weight:800; letter-spacing:1.2px; color:#fff; }
+.brand-caption { font-size:9px; letter-spacing:1.3px; color:#a9c0d1; margin-top:3px; }
+.sidebar-status { font-size:12px; color:#c4d5e1; display:flex; align-items:center; gap:8px; }
+.status-dot { width:8px; height:8px; border-radius:50%; background:#64c6a8; display:inline-block; }
+.sidebar-foot { color:#a9bdcd; font-size:11px; line-height:1.6; margin-top:28px; }
+.eyebrow { color:#398f8a; font-size:10px; font-weight:800; letter-spacing:2px; margin: 4px 0 10px; }
+.page-title { color:#12283e; font-size:34px; font-weight:750; letter-spacing:-1.1px; margin:0 0 7px; }
+.page-subtitle { color:#708196; font-size:14px; margin:0 0 25px; max-width:780px; }
+.hero-panel { background:linear-gradient(115deg,#10243a 0%,#183b54 75%,#1c5260 100%);
+    border-radius:20px; padding:42px 44px; color:white; min-height:265px;
+    box-shadow:0 14px 35px rgba(16,36,58,.13); }
+.hero-kicker { color:#83d1c6; font-size:10px; font-weight:800; letter-spacing:2px; margin-bottom:16px; }
+.hero-title { color:white; font-size:38px; line-height:1.12; font-weight:750; letter-spacing:-1px; }
+.hero-title span { color:#75d1c5; }
+.hero-copy { color:#c3d3df; max-width:640px; font-size:14px; line-height:1.75; margin-top:17px; }
+.feature-card, .metric-card, .upload-summary { background:white; border:1px solid var(--line);
+    border-radius:15px; padding:20px; height:100%; box-shadow:0 5px 18px rgba(25,49,73,.035); }
+.feature-symbol { color:#3d9992; font-size:11px; font-weight:800; letter-spacing:1.5px; margin-bottom:13px; }
+.feature-title { color:#18334b; font-size:17px; font-weight:750; margin-bottom:7px; }
+.feature-copy { color:#718196; font-size:12px; line-height:1.65; }
+.metric-label, .summary-label { color:#8190a1; font-size:9px; font-weight:800; letter-spacing:1.25px; }
+.metric-value { color:#17334b; font-size:24px; font-weight:800; margin:8px 0 4px; }
+.metric-note { color:#8190a1; font-size:11px; line-height:1.45; }
+.summary-value { color:#1c344b; font-size:13px; font-weight:650; line-height:1.5; margin:5px 0 15px; }
+.notice { border:1px solid #d9e9e8; background:#edf7f6; color:#376c6a; padding:12px 15px;
+    border-radius:10px; font-size:12px; margin-bottom:18px; }
+.empty-state { border:1px dashed #c9d6e0; background:#fff; border-radius:16px; padding:42px 20px;
+    text-align:center; margin-top:15px; }
+.empty-icon { color:#55a9a1; font-size:34px; margin-bottom:7px; }
+.empty-title { color:#1b354d; font-weight:750; font-size:16px; }
+.empty-copy { color:#8492a2; font-size:12px; margin-top:5px; }
+.app-footer { border-top:1px solid #e1e8ee; margin-top:45px; padding:18px 0 8px;
+    text-align:center; color:#8795a4; font-size:9px; line-height:1.8; letter-spacing:1px; }
+.stButton > button[kind="primary"] { background:#1c7776; border:1px solid #1c7776; border-radius:9px;
+    min-height:44px; font-weight:700; }
+.stButton > button[kind="primary"]:hover { background:#155e60; border-color:#155e60; }
+[data-testid="stFileUploader"] { background:#fff; border-radius:13px; }
+[data-testid="stMetric"] { background:white; border:1px solid var(--line); border-radius:12px; padding:14px; }
+h2, h3 { color:#18334b; }
