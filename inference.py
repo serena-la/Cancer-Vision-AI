@@ -46,33 +46,55 @@ preprocess = transforms.Compose([
 
 
 def load_model():
-    if not CHECKPOINT_PATH.exists():
-        raise FileNotFoundError(
-            f"Could not find {CHECKPOINT_PATH.name}. Put your trained best.pt "
-            "checkpoint in the same folder as app.py."
-        )
+    import torch
+    import os
+    from model import build_model
 
-    # The notebook checkpoint contains model weights and simple metadata only.
-    try:
-        checkpoint = torch.load(
-            CHECKPOINT_PATH, map_location=DEVICE, weights_only=True
-        )
-    except TypeError:  # Compatibility with older PyTorch releases.
-        checkpoint = torch.load(CHECKPOINT_PATH, map_location=DEVICE)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    arch = checkpoint.get("arch", "resnet50")
-    model = build_model(arch=arch)
-    model.load_state_dict(checkpoint["model"])
-    model.to(DEVICE)
+    checkpoint_path = os.path.join(
+        os.path.dirname(__file__), "best.pt"
+    )
+
+    checkpoint = torch.load(
+        checkpoint_path,
+        map_location=device,
+        weights_only=True
+    )
+
+    # Handle both raw state dictionaries and checkpoint dictionaries
+    if isinstance(checkpoint, dict) and "model" in checkpoint:
+        state_dict = checkpoint["model"]
+        class_to_idx = checkpoint.get("class_to_idx", None)
+        size = checkpoint.get("size", 512)
+
+    elif isinstance(checkpoint, dict) and "model_state_dict" in checkpoint:
+        state_dict = checkpoint["model_state_dict"]
+        class_to_idx = checkpoint.get("class_to_idx", None)
+        size = checkpoint.get("size", 512)
+
+    else:
+        state_dict = checkpoint
+        class_to_idx = None
+        size = 512
+
+    # Reconstruct your ResNet-50 architecture
+    model = build_model(arch="resnet50")
+
+    model.load_state_dict(state_dict)
+    model.to(device)
     model.eval()
 
-    class_to_idx = checkpoint.get("class_to_idx", {})
-    if "tumor" not in class_to_idx:
+    # Your original class mapping must be verified
+    if class_to_idx is not None:
+        tumor_idx = class_to_idx["tumor"]
+    else:
         raise ValueError(
-            "The checkpoint does not contain class_to_idx['tumor']. "
-            "Check that this is the best.pt file produced by your training notebook."
+            "The checkpoint does not contain class_to_idx. "
+            "Please provide the original training class mapping "
+            "to identify the tumour class correctly."
         )
-    tumor_idx = int(class_to_idx["tumor"])
+
     return model, tumor_idx
 
 
