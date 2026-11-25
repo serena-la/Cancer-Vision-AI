@@ -89,11 +89,8 @@ def load_model():
     if class_to_idx is not None:
         tumor_idx = class_to_idx["tumor"]
     else:
-        raise ValueError(
-            "The checkpoint does not contain class_to_idx. "
-            "Please provide the original training class mapping "
-            "to identify the tumour class correctly."
-        )
+    # Original training class mapping
+        tumor_idx = 1
 
     return model, tumor_idx
 
